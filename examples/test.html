@@ -1,157 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" href="../dist/cropper.css">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="../dist/cropper.css">
 </head>
 <body>
-	<style>
-	
-	.wrap .cropper-point.point-se{
+  <style>
+  
+  .wrap .cropper-point.point-se{
       width: 5px;
       height: 5px;
     }
-	.cropper-view-box,
+  .cropper-view-box,
     .cropper-face {
       border-radius: 50%;
     }
     #image{
-    	max-width: 250px;
+      max-width: 250px;
     }
     .wrap{
-    	width: 350px;
-    	max-height: 350px;
+      width: 350px;
+      max-height: 350px;
     }
     .preview-wrap{
-    	border-radius: 50%;
-    	overflow: hidden;
+    }
+    .preview{
+      border-radius: 50%;
+      overflow: hidden;
+      border:1px solid #eee;
     }
     .preview1{
-		width: 100px;
-		height: 100px;
+    width: 100px;
+    height: 100px;
     }
     .preview2{
-		width: 200px;
-		height: 200px;
+    width: 200px;
+    height: 200px;
     }
     .preview3{
-		width: 300px;
-		height: 300px;
+    width: 300px;
+    height: 300px;
     }
     .rotate,.move,.scale{
-		position: absolute;
-		top: 0;
-		width: 50px;
-		height: 50px;
-		background-color: red;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background-color: red;
     }
     .move{
-    	top: 60px;
+      top: 60px;
     }
     .scale{
-    	top: 120px;
+      top: 120px;
     }
     .rotate1,.move1,.scale1{
-		left: 500px;
+    left: 500px;
     }
     .rotate2,.move2,.scale2{
-		left: 600px;
+    left: 600px;
     }
     .rotate3,.move3,.scale3{
-		left: 700px;
+    left: 700px;
     }
     .move4{
-		left: 800px;
+    left: 800px;
     }
     </style>
-	<div class="rotate rotate1" data-method="rotate" data-option="30">rotate1</div>
-	<div class="rotate rotate2" data-method="rotate" data-option="45">rotate2</div>
-	<div class="rotate rotate3" data-method="rotate" data-option="90">rotate3</div>
-	
-	<div class="move move1" data-method="move" data-optionx="10" data-optiony="0">move1</div>
-	<div class="move move2" data-method="move" data-optionx="-10" data-optiony="0">move2</div>
-	<div class="move move3" data-method="move" data-optionx="0" data-optiony="10">move3</div>
-	<div class="move move4" data-method="move" data-optionx="0" data-optiony="-10">move4</div>
-	
-	<div class="scale scale1" data-method="scale" data-optionx="1" data-optiony="1">scale1</div>
-	<div class="scale scale2" data-method="scale" data-optionx="-1" data-optiony="1">scale2</div>
-	<div class="scale scale3" data-method="scale" data-optionx="1" data-optiony="-1">scale3</div>
+  <div class="rotate rotate1" data-method="rotate" data-option="30">rotate1</div>
+  <div class="rotate rotate2" data-method="rotate" data-option="45">rotate2</div>
+  <div class="rotate rotate3" data-method="rotate" data-option="90">rotate3</div>
+  
+  <div class="move move1" data-method="move" data-optionx="10" data-optiony="0">move1</div>
+  <div class="move move2" data-method="move" data-optionx="-10" data-optiony="0">move2</div>
+  <div class="move move3" data-method="move" data-optionx="0" data-optiony="10">move3</div>
+  <div class="move move4" data-method="move" data-optionx="0" data-optiony="-10">move4</div>
+  
+  <div class="scale scale1" data-method="scale" data-optionx="1" data-optiony="1">scale1</div>
+  <div class="scale scale2" data-method="scale" data-optionx="-1" data-optiony="1">scale2</div>
+  <div class="scale scale3" data-method="scale" data-optionx="1" data-optiony="-1">scale3</div>
 
-	<div class="wrap">
-	  <img id="image" src="../docs/images/picture.jpg">
-	</div>
+  <div class="wrap">
+    <img id="image" src="../docs/images/picture.jpg">
+    
+  </div>
 
-	<div class="preview1 preview-wrap">
-		<div class="preview"></div>
-	</div>
-	<div class="preview2 preview-wrap">
-		<div class="preview"></div>
-	</div>
-	<div class="preview3 preview-wrap">
-		<div class="preview"></div>
-	</div>
+  <div class="preview1 preview">
+      <img id="image" src="../docs/images/picture.jpg">
+  </div>
+  <div class="preview2 preview">
+      <img id="image" src="../docs/images/picture.jpg">
+  </div>
+  <div class="preview3 preview">
+      <img id="image" src="../docs/images/picture.jpg">
+  </div>
 
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-  	<script src="../dist/cropper.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="../dist/cropper.js"></script>
 
-  	<script>
-  	var $image = $('#image');
-  	var $previews = $('.preview');
+    <script>
+    var $image = $('#image');
+    var $previews = $('.preview');
+    console.log( $('body').find('.preview').selector );
+    $('.rotate').click(function(event) {
+      var data = $(this).data();
+      $image.cropper(data.method,data.option)
+    });
 
-  	$('.rotate').click(function(event) {
-  		var data = $(this).data();
-  		$image.cropper(data.method,data.option)
-  	});
+    $('.move,.scale').click(function(event) {
+      var data = $(this).data();
+      $image.cropper(data.method,data.optionx,data.optiony)
+    });
 
-  	$('.move,.scale').click(function(event) {
-  		var data = $(this).data();
-  		$image.cropper(data.method,data.optionx,data.optiony)
-  	});
-
-
-	$image.cropper({
+  $image.cropper({
         aspectRatio: 1,
         viewMode: 1,
         dragMode:1,
-        toggleDragModeOnDblclick:false,
-        ready: function () {
-        	var $clone = $(this).clone().removeClass('cropper-hidden');
+        preview:'.preview',
+        toggleDragModeOnDblclick:false
+    });
 
-            $clone.css({
-              display: 'block',
-              width: '100%',
-              minWidth: 0,
-              minHeight: 0,
-              maxWidth: 'none',
-              maxHeight: 'none'
-            });
-
-            $previews.css({
-              width: '100%',
-              overflow: 'hidden'
-            }).html($clone);
-        },
-        crop: function (e) {
-            var imageData = $(this).cropper('getImageData');
-            var previewAspectRatio = e.width / e.height;
-
-            $previews.each(function () {
-              var $preview = $(this);
-              var previewWidth = $preview.width();
-              var previewHeight = previewWidth / previewAspectRatio;
-              var imageScaledRatio = e.width / previewWidth;
-
-              $preview.height(previewHeight).find('img').css({
-                width: imageData.naturalWidth / imageScaledRatio,
-                height: imageData.naturalHeight / imageScaledRatio,
-                marginLeft: -e.x / imageScaledRatio,
-                marginTop: -e.y / imageScaledRatio
-              });
-            });
-          }
-  	});
-
-  	</script>
+    </script>
 </body>
 </html>
